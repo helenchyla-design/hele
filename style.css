@@ -1,0 +1,119 @@
+/* ==========================================================================
+   ESTE É O SEU ARQUIVO DE ESTILO (STYLE.CSS)
+   ========================================================================== */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f9f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 650px;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-top: 8px solid #2e7d32;
+}
+
+h1 {
+    color: #2e7d32;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+p.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+p.instrucao {
+    font-weight: bold;
+    color: #1b5e20;
+    margin-bottom: 15px;
+}
+
+/* Esconde as bolinhas do botão radio */
+input[type="radio"] {
+    display: none;
+}
+
+/* Grade dos botões de escolha */
+.opcoes-abas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+/* Estilo dos botões */
+.aba-label {
+    padding: 15px;
+    background-color: #f0f4f0;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    transition: all 0.2s ease;
+}
+
+.aba-label:hover {
+    background-color: #e8f5e9;
+    border-color: #81c784;
+}
+
+/* Esconde as caixas de resposta por padrão */
+.painel-conteudo {
+    display: none;
+    padding: 20px;
+    border-radius: 8px;
+    line-height: 1.6;
+    animation: fadeIn 0.4s ease;
+}
+
+.sucesso {
+    background-color: #e8f5e9;
+    border-left: 5px solid #2e7d32;
+    color: #1b5e20;
+}
+
+.alerta {
+    background-color: #fff3e0;
+    border-left: 5px solid #ff9800;
+    color: #e65100;
+}
+
+/* Mágica do CSS para alternar as abas sem JavaScript */
+#aba-soja:checked ~ .opcoes-abas label[for="aba-soja"],
+#aba-milho:checked ~ .opcoes-abas label[for="aba-milho"],
+#aba-feijao:checked ~ .opcoes-abas label[for="aba-feijao"],
+#aba-pastagem:checked ~ .opcoes-abas label[for="aba-pastagem"] {
+    background-color: #2e7d32;
+    color: white;
+    border-color: #1b5e20;
+}
+
+#aba-soja:checked ~ .conteudo #txt-soja,
+#aba-milho:checked ~ .conteudo #txt-milho,
+#aba-feijao:checked ~ .conteudo #txt-feijao,
+#aba-pastagem:checked ~ .conteudo #txt-pastagem {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

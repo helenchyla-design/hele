@@ -3,139 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoSolo - Assistente do Produtor</title>
-    <style>
-        /* Estilização moderna e ecológica */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f9f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-top: 8px solid #2e7d32;
-        }
-
-        h1 {
-            color: #2e7d32;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        p.subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #1b5e20;
-        }
-
-        select, button {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-
-        select:focus {
-            outline: none;
-            border-color: #2e7d32;
-        }
-
-        button {
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background-color: #1b5e20;
-        }
-
-        .resultado {
-            margin-top: 25px;
-            padding: 15px;
-            border-radius: 6px;
-            display: none;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .alerta { background-color: #ffe0b2; color: #e65100; }
-        .sucesso { background-color: #c8e6c9; color: #2e7d32; }
-    </style>
+    <title>EcoSolo - Guia de Rotação de Culturas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
     <h1>🌱 Projeto EcoSolo</h1>
-    <p class="subtitle">Descubra a melhor rotação de culturas para a sua terra</p>
+    <p class="subtitle">Guia Interativo de Rotação de Culturas Inteligente</p>
 
-    <div class="form-group">
-        <label for="cultura">O que você plantou na última safra?</label>
-        <select id="cultura">
-            <option value="">-- Selecione uma opção --</option>
-            <option value="soja">Soja</option>
-            <option value="milho">Milho</option>
-            <option value="feijao">Feijão</option>
-            <option value="pastagem">Pastagem / Solo Descansado</option>
-        </select>
+    <input type="radio" id="aba-soja" name="cultura-grupo">
+    <input type="radio" id="aba-milho" name="cultura-grupo">
+    <input type="radio" id="aba-feijao" name="cultura-grupo">
+    <input type="radio" id="aba-pastagem" name="cultura-grupo">
+
+    <p class="instrucao">Selecione o que foi plantado na última safra:</p>
+
+    <div class="opcoes-abas">
+        <label for="aba-soja" class="aba-label">🍂 Soja</label>
+        <label for="aba-milho" class="aba-label">🌽 Milho</label>
+        <label for="aba-feijao" class="aba-label">🫘 Feijão</label>
+        <label for="aba-pastagem" class="aba-label">🌾 Pastagem</label>
     </div>
 
-    <button onclick="calcularRotacao()">Analisar Próximo Passo</button>
+    <div class="conteudo">
+        
+        <div id="txt-soja" class="painel-conteudo sucesso">
+            <h3>💡 Próximo passo recomendado: Milho</h3>
+            <p>A soja fixa nitrogênio natural no solo. Plantar milho em seguida economiza adubo químico e aumenta a produção!</p>
+        </div>
 
-    <div id="resultado" class="resultado"></div>
+        <div id="txt-milho" class="painel-conteudo alerta">
+            <h3>⚠️ Próximo passo recomendado: Feijão ou Descanso</h3>
+            <p>O milho esgota o nitrogênio da terra. Mude para feijão ou pastagem para recuperar o solo naturalmente.</p>
+        </div>
+
+        <div id="txt-feijao" class="painel-conteudo sucesso">
+            <h3>💡 Próximo passo recomendado: Algodão ou Trigo</h3>
+            <p>O feijão deixa o solo equilibrado. Excelente momento para plantar trigo ou algodão e manter a terra saudável.</p>
+        </div>
+
+        <div id="txt-pastagem" class="painel-conteudo sucesso">
+            <h3>🚀 Próximo passo recomendado: Soja ou Milho</h3>
+            <p>Solo descansado e revigorado! Hora ideal para plantar culturas principais e colher o máximo de produtividade.</p>
+        </div>
+
+    </div>
 </div>
-
-<script>
-function calcularRotacao() {
-    const culturaAtual = document.getElementById('cultura').value;
-    const resultadoDiv = document.getElementById('resultado');
-
-    if (!culturaAtual) {
-        alert("Por favor, selecione o que você plantou antes.");
-        return;
-    }
-
-    resultadoDiv.style.display = "block";
-
-    // Lógica de recomendação agrícola baseada na rotação de culturas
-    if (culturaAtual === "soja") {
-        resultadoDiv.className = "resultado sucesso";
-        resultadoDiv.innerHTML = "💡 Recomendação: Plante <strong>Milho</strong> na próxima safra. A soja fixa nitrogênio no solo, o que é excelente para o crescimento do milho!";
-    } else if (culturaAtual === "milho") {
-        resultadoDiv.className = "resultado alerta";
-        resultadoDiv.innerHTML = "⚠️ Atenção: O milho consome muitos nutrientes. Recomendamos plantar <strong>Feijão</strong> ou fazer um período de <strong>Pastagem (Brachiaria)</strong> para recuperar o solo.";
-    } else if (culturaAtual === "feijao") {
-        resultadoDiv.className = "resultado sucesso";
-        resultadoDiv.innerHTML = "💡 Recomendação: Seu solo está equilibrado. Você pode entrar com uma safra de <strong>Soja</strong> ou <strong>Trigo</strong>, dependendo da época do ano.";
-    } else if (culturaAtual === "pastagem") {
-        resultadoDiv.className = "resultado sucesso";
-        resultadoDiv.innerHTML = "🚀 Solo Pronto! Sua terra descansou e está rica em matéria orgânica. É o momento ideal para plantar <strong>Soja ou Milho</strong> com alta produtividade.";
-    }
-}
-</script>
 
 </body>
 </html>
