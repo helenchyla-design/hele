@@ -3,38 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Novo Site</title>
-    <link rel="stylesheet" href="style.css">
+    <title>EcoSolo - Assistente do Produtor</title>
+    <style>
+        /* Estilização moderna e ecológica */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f9f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 8px solid #2e7d32;
+        }
+
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+        }
+
+        .resultado {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .alerta { background-color: #ffe0b2; color: #e65100; }
+        .sucesso { background-color: #c8e6c9; color: #2e7d32; }
+    </style>
 </head>
 <body>
 
-    <header>
-        <h1>Bem-vindo ao Meu Site</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
+<div class="container">
+    <h1>🌱 Projeto EcoSolo</h1>
+    <p class="subtitle">Descubra a melhor rotação de culturas para a sua terra</p>
 
-    <main>
-        <section id="home">
-            <h2>Página Inicial</h2>
-            <p>Este é o arquivo <strong>index.html</strong>, a página principal do seu site.</p>
-        </section>
+    <div class="form-group">
+        <label for="cultura">O que você plantou na última safra?</label>
+        <select id="cultura">
+            <option value="">-- Selecione uma opção --</option>
+            <option value="soja">Soja</option>
+            <option value="milho">Milho</option>
+            <option value="feijao">Feijão</option>
+            <option value="pastagem">Pastagem / Solo Descansado</option>
+        </select>
+    </div>
 
-        <section id="sobre">
-            <h2>Sobre Nós</h2>
-            <p>Aqui você pode contar um pouco sobre a história ou o objetivo do seu projeto.</p>
-        </section>
-    </main>
+    <button onclick="calcularRotacao()">Analisar Próximo Passo</button>
 
-    <footer>
-        <p>&copy; 2026 - Todos os direitos reservados.</p>
-    </footer>
+    <div id="resultado" class="resultado"></div>
+</div>
 
-    <script src="script.js"></script>
+<script>
+function calcularRotacao() {
+    const culturaAtual = document.getElementById('cultura').value;
+    const resultadoDiv = document.getElementById('resultado');
+
+    if (!culturaAtual) {
+        alert("Por favor, selecione o que você plantou antes.");
+        return;
+    }
+
+    resultadoDiv.style.display = "block";
+
+    // Lógica de recomendação agrícola baseada na rotação de culturas
+    if (culturaAtual === "soja") {
+        resultadoDiv.className = "resultado sucesso";
+        resultadoDiv.innerHTML = "💡 Recomendação: Plante <strong>Milho</strong> na próxima safra. A soja fixa nitrogênio no solo, o que é excelente para o crescimento do milho!";
+    } else if (culturaAtual === "milho") {
+        resultadoDiv.className = "resultado alerta";
+        resultadoDiv.innerHTML = "⚠️ Atenção: O milho consome muitos nutrientes. Recomendamos plantar <strong>Feijão</strong> ou fazer um período de <strong>Pastagem (Brachiaria)</strong> para recuperar o solo.";
+    } else if (culturaAtual === "feijao") {
+        resultadoDiv.className = "resultado sucesso";
+        resultadoDiv.innerHTML = "💡 Recomendação: Seu solo está equilibrado. Você pode entrar com uma safra de <strong>Soja</strong> ou <strong>Trigo</strong>, dependendo da época do ano.";
+    } else if (culturaAtual === "pastagem") {
+        resultadoDiv.className = "resultado sucesso";
+        resultadoDiv.innerHTML = "🚀 Solo Pronto! Sua terra descansou e está rica em matéria orgânica. É o momento ideal para plantar <strong>Soja ou Milho</strong> com alta produtividade.";
+    }
+}
+</script>
+
 </body>
 </html>
